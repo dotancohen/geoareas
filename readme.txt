@@ -31,11 +31,12 @@ Because that is what a particular client needed when I wrote it.
 
 No problem. Contact me with the hierarchical areas in your nation of interest and I'll make a plugin for it.
 
+= On what did you base the code? =
+
+The discussion on this page was of great help: http://wpquestions.com/question/showChrono/id/9690
+
 == Changelog ==
 
-= 0.2 =
-* Add much data
-
 = 0.1 =
-* Initial version, containing skeleton code and very little data
+* Initial version
 
