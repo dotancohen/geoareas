@@ -145,14 +145,17 @@ $sub_south = array (
 
 
 
-$north = array('north' => 'צפון', 'inner' => $sub_north);
-$hadera = array('hadera' => 'חדרה זכרון ועמקים', 'inner' => $sub_hadera);
-$hasharon = array('hasharon' => 'השרון', 'inner' => $sub_hasharon);
-$center = array('center' => 'מרכז', 'inner' => $sub_center);
-$jerusalem = array('jerusalem' => 'אזור ירושלים', 'inner' => $sub_jerusalem);
-$aiosh = array('aiosh' => 'יהודה שומרון ובקעת הירדן', 'inner' => $sub_aiosh);
-$shefela = array('shefela' => 'שפלה מישור חוף דרומי', 'inner' => $sub_shefela);
-$south = array('south' => 'דרום', 'inner' => $sub_south);
+	$main_areas = array(
+		array('north' => 'צפון', 'inner' => $sub_north),
+		array('hadera' => 'חדרה זכרון ועמקים', 'inner' => $sub_hadera),
+		array('hasharon' => 'השרון', 'inner' => $sub_hasharon),
+		array('center' => 'מרכז', 'inner' => $sub_center),
+		array('jerusalem' => 'אזור ירושלים', 'inner' => $sub_jerusalem),
+		array('aiosh' => 'יהודה שומרון ובקעת הירדן', 'inner' => $sub_aiosh),
+		array('shefela' => 'שפלה מישור חוף דרומי', 'inner' => $sub_shefela),
+		array('south' => 'דרום', 'inner' => $sub_south)
+	);
+
 
 	return array(
 		'everything' => 'כל האזורים',
