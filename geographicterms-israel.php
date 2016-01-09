@@ -48,20 +48,37 @@ function dc_gt_israel_register_taxonomy()
 add_action('init', 'dc_gt_israel_add_terms');
 function dc_gt_israel_add_terms()
 {
-	$check = get_terms('geographicterms_israel')
+	$taxonomy = 'geographicterms_israel';
+	$check = get_terms($taxonomy);
 
 	if ( !$check ) {
 		$areas = dc_gt_israel_get_areas();
-		dc_gt_israel_add_area($areas);
+		dc_gt_israel_add_area($taxonomy, $areas);
 	}
 
 }
 
 
 
-function dc_gt_israel_add_area($area)
+function dc_gt_israel_add_area($taxonomy_name, $area, $parent_id=0, $last_area=0)
 {
+	foreach ( $area as $slug=>$name ) {
+		if ( is_array($name) && $slug!='inner' ) {
+			dc_gt_israel_add_area($taxonomy_name, $name, $parent_id);
+		} else {
 
+			if ( $slug=='inner' ) {
+				dc_gt_israel_add_area($taxonomy_name, $area, $last_area['term_id'], $last_area);
+			} else {
+				$args = array('slug'=>$slug, 'parent'=>$parent_id);
+				if ( !term_exists($name, $taxonomy, $args) ) {
+					$last_area = wp_insert_term($name, $taxonomy, $args);
+				}
+			}
+
+		}
+
+	}
 }
 
 
