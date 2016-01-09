@@ -51,22 +51,22 @@ function dc_gt_israel_add_terms()
 	$check = get_terms('geographicterms_israel')
 
 	if ( !$check ) {
-		$areas = get_areas();
-		insert_area($areas);
+		$areas = dc_gt_israel_get_areas();
+		dc_gt_israel_add_area($areas);
 	}
 
 }
 
 
 
-function insert_area($area)
+function dc_gt_israel_add_area($area)
 {
 
 }
 
 
 
-function get_areas()
+function dc_gt_israel_get_areas()
 {
 	$sub_north = array (
 		'haifa' => 'חיפה והסביבה',
