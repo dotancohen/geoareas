@@ -39,7 +39,7 @@ function dc_gt_israel_register_taxonomy()
 
 	$post_types = array('post', 'request', 'offering', 'page', 'partner');
 
-	register_taxonomy('geographicterms-israel', $post_types, $args);
+	register_taxonomy('geographicterms_israel', $post_types, $args);
 
 }
 
@@ -48,7 +48,19 @@ function dc_gt_israel_register_taxonomy()
 add_action('init', 'dc_gt_israel_add_terms');
 function dc_gt_israel_add_terms()
 {
-	$areas = get_areas();
+	$check = get_terms('geographicterms_israel')
+
+	if ( !$check ) {
+		$areas = get_areas();
+		insert_area($areas);
+	}
+
+}
+
+
+
+function insert_area($area)
+{
 
 }
 
