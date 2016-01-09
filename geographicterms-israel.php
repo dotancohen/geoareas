@@ -45,3 +45,19 @@ function dc_gt_israel_register_taxonomy()
 
 
 
+add_action('init', 'dc_gt_israel_add_terms');
+function dc_gt_israel_add_terms()
+{
+	$areas = get_areas();
+
+}
+
+
+
+function get_areas()
+{
+	return array(
+		
+	);
+}
+
