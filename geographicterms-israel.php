@@ -12,6 +12,23 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 defined('ABSPATH') or die('Nice try!');
 
 
+
+class GeographicArea {
+
+	public $slug;
+	public $name;
+	public $children;
+
+	public function __construct($slug, $name, $children=NULL)
+	{
+		$this->slug = $slug;
+		$this->name = $name;
+		$this->children = $children;
+	}
+}
+
+
+
 add_action('init', 'dc_gt_israel_register_taxonomy');
 function dc_gt_israel_register_taxonomy()
 {
@@ -60,22 +77,18 @@ function dc_gt_israel_add_terms()
 
 
 
-function dc_gt_israel_add_area($taxonomy_name, $area, $parent_id=0, $last_area=0)
-{
-	foreach ( $area as $slug=>$name ) {
-		if ( is_array($name) && $slug!='inner' ) {
-			dc_gt_israel_add_area($taxonomy_name, $name, $parent_id);
-		} else {
+function dc_gt_israel_add_area($taxonomy, $areas, $parent_id=0) {
 
-			if ( $slug=='inner' ) {
-				dc_gt_israel_add_area($taxonomy_name, $area, $last_area['term_id'], $last_area);
-			} else {
-				$args = array('slug'=>$slug, 'parent'=>$parent_id);
-				if ( !term_exists($name, $taxonomy, $args) ) {
-					$last_area = wp_insert_term($name, $taxonomy, $args);
-				}
-			}
+	foreach ( $areas as $area ) {
 
+		$term = term_exists($area->name, $taxonomy, $parent_id);
+		if ( $term===0 ) {
+			$args = array('slug'=>$area->slug, 'parent'=>$parent_id);
+			$term = wp_insert_term($area->name, $taxonomy, $args);
+		}
+
+		if ( $area->children !== NULL ) {
+			dc_gt_israel_add_area($taxonomy, $area->children, $term['term_id']);
 		}
 
 	}
@@ -86,101 +99,100 @@ function dc_gt_israel_add_area($taxonomy_name, $area, $parent_id=0, $last_area=0
 function dc_gt_israel_get_areas()
 {
 	$sub_north = array (
-		'haifa' => 'חיפה והסביבה',
-		'kraiot' => 'קריות והסביבה',
-		'ako_naharia' => 'עכו - נהריה והסביבה',
-		'galil_top' => 'גליל עליון',
-		'kinneret' => 'הכנרת והסביבה',
-		'carmiel' => 'כרמיאל והסביבה',
-		'natzrat' => 'נצרת - שפרעם והסביבה',
-		'rosh_pina' => 'ראש פינה החולה',
-		'galil_bottom' => 'גליל תחתון',
-		'golan' => 'הגולן'
+		new GeographicArea('haifa', 'חיפה והסביבה'),
+		new GeographicArea('kraiot', 'קריות והסביבה'),
+		new GeographicArea('ako_naharia', 'עכו - נהריה והסביבה'),
+		new GeographicArea('galil_top', 'גליל עליון'),
+		new GeographicArea('kinneret', 'הכנרת והסביבה'),
+		new GeographicArea('carmiel', 'כרמיאל והסביבה'),
+		new GeographicArea('natzrat', 'נצרת - שפרעם והסביבה'),
+		new GeographicArea('rosh_pina', 'ראש פינה החולה'),
+		new GeographicArea('galil_bottom', 'גליל תחתון'),
+		new GeographicArea('golan', 'הגולן')
 	);
 
 	$sub_hadera = array (
-		'zichron' => 'זכרון וחוף הכרמל',
-		'hadera' => 'חדרה והסביבה',
-		'cesaria' => 'קיסריה והסביבה',
-		'yokneam' => 'יקנעם טבעון והסביבה',
-		'house_of_shaan' => 'עמק בית שאן',
-		'afula' => 'עפולה והעמקים',
-		'meshane_heights' => 'רמת מנשה'
+		new GeographicArea('zichron', 'זכרון וחוף הכרמל'),
+		new GeographicArea('hadera', 'חדרה והסביבה'),
+		new GeographicArea('cesaria', 'קיסריה והסביבה'),
+		new GeographicArea('yokneam', 'יקנעם טבעון והסביבה'),
+		new GeographicArea('house_of_shaan', 'עמק בית שאן'),
+		new GeographicArea('afula', 'עפולה והעמקים'),
+		new GeographicArea('meshane_heights', 'רמת מנשה')
 	);
 
 	$sub_hasharon = array (
-		'netanya' => 'נתניה והסביבה',
-		'hertzelia' => 'רמת השרון - הרצליה',
-		'raanana' => 'רעננה - כפר סבא',
-		'hod_hasharon' => 'הוד השרון והסביבה',
-		'south_sharon' => 'דרום השרון',
-		'north_sharon' => 'צפון השרון'
+		new GeographicArea('netanya', 'נתניה והסביבה'),
+		new GeographicArea('hertzelia', 'רמת השרון - הרצליה'),
+		new GeographicArea('raanana', 'רעננה - כפר סבא'),
+		new GeographicArea('hod_hasharon', 'הוד השרון והסביבה'),
+		new GeographicArea('south_sharon', 'דרום השרון'),
+		new GeographicArea('north_sharon', 'צפון השרון')
 	);
 
 	$sub_center = array (
-		'tel_aviv' => 'תל אביב',
-		'rishon' => 'ראשון לציון והסביבה',
-		'bat_yam' => 'חולון - בת ים',
-		'ramat_gan' => 'רמת גן - גבעתיים',
-		'petach_tikva' => 'פתח תקווה והסביבה',
-		'rosh_haain' => 'ראש העין והסביבה',
-		'ono' => 'בקעת אונו',
-		'lod' => 'רמלה - לוד',
-		'bnei_brak' => 'בני ברק - גבעת שמואל',
-		'ayalon' => 'עמק  איילון',
-		'shoham' => 'שוהם והסביבה',
-		'modiin' => 'מודיעין והסביבה'
+		new GeographicArea('tel_aviv', 'תל אביב'),
+		new GeographicArea('rishon', 'ראשון לציון והסביבה'),
+		new GeographicArea('bat_yam', 'חולון - בת ים'),
+		new GeographicArea('ramat_gan', 'רמת גן - גבעתיים'),
+		new GeographicArea('petach_tikva', 'פתח תקווה והסביבה'),
+		new GeographicArea('rosh_haain', 'ראש העין והסביבה'),
+		new GeographicArea('ono', 'בקעת אונו'),
+		new GeographicArea('lod', 'רמלה - לוד'),
+		new GeographicArea('bnei_brak', 'בני ברק - גבעת שמואל'),
+		new GeographicArea('ayalon', 'עמק איילון'),
+		new GeographicArea('shoham', 'שוהם והסביבה'),
+		new GeographicArea('modiin', 'מודיעין והסביבה')
 	);
 
 	$sub_jerusalem = array (
-		'jerusalem' => 'ירושלים',
-		'beit_shemesh' => 'בית שמש והסביבה',
-		'mivreshet' => 'הרי יהודה - מבשרת והסביבה',
-		'maale_adomim' => 'מעלה אדומים והסביבה'
+		new GeographicArea('jerusalem', 'ירושלים'),
+		new GeographicArea('beit_shemesh', 'בית שמש והסביבה'),
+		new GeographicArea('mivreshet', 'הרי יהודה - מבשרת והסביבה'),
+		new GeographicArea('maale_adomim', 'מעלה אדומים והסביבה')
 	);
 
 	$sub_aiosh = array (
-		'south_hebron' => 'ישובי דרום ההר',
-		'shomron' => 'ישובי שומרון',
-		'gush_atzion' => 'גוש עציון',
-		'north_dead_sea' => 'בקעת הירדן וצפון ים המלח',
-		'ariel' => 'אריאל וישובי יהודה'
+		new GeographicArea('south_hebron', 'ישובי דרום ההר'),
+		new GeographicArea('shomron', 'ישובי שומרון'),
+		new GeographicArea('gush_atzion', 'גוש עציון'),
+		new GeographicArea('north_dead_sea', 'בקעת הירדן וצפון ים המלח'),
+		new GeographicArea('ariel', 'אריאל וישובי יהודה')
 	);
 
 	$sub_shefela = array (
-		'ness_tziona' => 'נס ציונה - רחובות',
-		'ashdod' => 'אשדוד - אשקלון והסביבה',
-		'gdera' => 'גדרה - יבנה והסביבה',
-		'kiryat_gat' => 'קרית גת והסביבה',
-		'shfela' => 'שפלה'
+		new GeographicArea('ness_tziona', 'נס ציונה - רחובות'),
+		new GeographicArea('ashdod', 'אשדוד - אשקלון והסביבה'),
+		new GeographicArea('gdera', 'גדרה - יבנה והסביבה'),
+		new GeographicArea('kiryat_gat', 'קרית גת והסביבה'),
+		new GeographicArea('shfela', 'שפלה')
 	);
 
 	$sub_south = array (
-		'beersheba' => 'באר שבע והסביבה',
-		'eilat' => 'אילת וערבה',
-		'negev' => 'ישובי הנגב',
-		'west_negev' => 'הנגב המערבי',
-		'south_dead_sea' => 'דרום ים המלח'
+		new GeographicArea('beersheba', 'באר שבע והסביבה'),
+		new GeographicArea('eilat', 'אילת וערבה'),
+		new GeographicArea('negev', 'ישובי הנגב'),
+		new GeographicArea('west_negev', 'הנגב המערבי'),
+		new GeographicArea('south_dead_sea', 'דרום ים המלח')
 	);
  
 
 
 	$main_areas = array(
-		array('north' => 'צפון', 'inner' => $sub_north),
-		array('hadera' => 'חדרה זכרון ועמקים', 'inner' => $sub_hadera),
-		array('hasharon' => 'השרון', 'inner' => $sub_hasharon),
-		array('center' => 'מרכז', 'inner' => $sub_center),
-		array('jerusalem' => 'אזור ירושלים', 'inner' => $sub_jerusalem),
-		array('aiosh' => 'יהודה שומרון ובקעת הירדן', 'inner' => $sub_aiosh),
-		array('shefela' => 'שפלה מישור חוף דרומי', 'inner' => $sub_shefela),
-		array('south' => 'דרום', 'inner' => $sub_south)
+		new GeographicArea('north', 'צפון', $sub_north),
+		new GeographicArea('hadera', 'חדרה זכרון ועמקים', $sub_hadera),
+		new GeographicArea('hasharon', 'השרון', $sub_hasharon),
+		new GeographicArea('center', 'מרכז', $sub_center),
+		new GeographicArea('jerusalem', 'אזור ירושלים', $sub_jerusalem),
+		new GeographicArea('aiosh', 'יהודה שומרון ובקעת הירדן', $sub_aiosh),
+		new GeographicArea('shefela', 'שפלה מישור חוף דרומי', $sub_shefela),
+		new GeographicArea('south', 'דרום', $sub_south)
 	);
 
 
 
 	return array(
-		'everything' => 'כל האזורים',
-		'inner' => $main_areas
+		new GeographicArea('everything', 'כל האזורים', $main_areas),
 	);
 
 		
