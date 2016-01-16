@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Geographic Terms: Israel
+Plugin Name: GeoAreas: Israel
 Description: Provide a geography taxonomy containing the hierarchical areas inside the State of Israel.
 Version:     0.1
 Author:      Dotan Cohen
@@ -29,21 +29,21 @@ class GeographicArea {
 
 
 
-add_action('init', 'dc_gt_israel_register_taxonomy');
-function dc_gt_israel_register_taxonomy()
+add_action('init', 'geoareas_israel_register_taxonomy');
+function geoareas_israel_register_taxonomy()
 {
 	$labels = array(
-		'name'              => _x('Area', 'taxonomy general name'),
-		'singular_name'     => _x('Areas', 'taxonomy singular name'),
-		'search_items'      => __('Search Area'),
-		'all_items'         => __('All Areas'),
-		'parent_item'       => __('Parent Area'),
-		'parent_item_colon' => __('Parent Area:'),
-		'edit_item'         => __('Edit Area'),
-		'update_item'       => __('Update Area'),
-		'add_new_item'      => __('Add New Area'),
-		'new_item_name'     => __('New Area Name'),
-		'menu_name'         => __('Area')
+		'name'              => _x('GeoArea', 'taxonomy general name'),
+		'singular_name'     => _x('GeoAreas', 'taxonomy singular name'),
+		'search_items'      => __('Search GeoArea'),
+		'all_items'         => __('All GeoAreas'),
+		'parent_item'       => __('Parent GeoArea'),
+		'parent_item_colon' => __('Parent GeoArea:'),
+		'edit_item'         => __('Edit GeoArea'),
+		'update_item'       => __('Update GeoArea'),
+		'add_new_item'      => __('Add New GeoArea'),
+		'new_item_name'     => __('New GeoArea Name'),
+		'menu_name'         => __('GeoAreas')
 	);
 
 	$args = array(
@@ -62,22 +62,22 @@ function dc_gt_israel_register_taxonomy()
 
 
 
-add_action('init', 'dc_gt_israel_add_terms');
-function dc_gt_israel_add_terms()
+add_action('init', 'geoareas_israel_add_terms');
+function geoareas_israel_add_terms()
 {
 	$taxonomy = 'geographicterms_israel';
 	$check = get_terms($taxonomy);
 
 	if ( !$check ) {
-		$areas = dc_gt_israel_get_areas();
-		dc_gt_israel_add_area($taxonomy, $areas);
+		$areas = geoareas_israel_get_areas();
+		geoareas_israel_add_area($taxonomy, $areas);
 	}
 
 }
 
 
 
-function dc_gt_israel_add_area($taxonomy, $areas, $parent_id=0) {
+function geoareas_israel_add_area($taxonomy, $areas, $parent_id=0) {
 
 	foreach ( $areas as $area ) {
 
@@ -88,7 +88,7 @@ function dc_gt_israel_add_area($taxonomy, $areas, $parent_id=0) {
 		}
 
 		if ( $area->children !== NULL ) {
-			dc_gt_israel_add_area($taxonomy, $area->children, $term['term_id']);
+			geoareas_israel_add_area($taxonomy, $area->children, $term['term_id']);
 		}
 
 	}
@@ -96,7 +96,7 @@ function dc_gt_israel_add_area($taxonomy, $areas, $parent_id=0) {
 
 
 
-function dc_gt_israel_get_areas()
+function geoareas_israel_get_areas()
 {
 	$sub_north = array (
 		new GeographicArea('haifa', 'חיפה והסביבה'),
