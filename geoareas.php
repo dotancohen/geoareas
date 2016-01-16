@@ -86,7 +86,7 @@ function geoareas_add_area($taxonomy, $areas, $parent_id=0) {
 	foreach ( $areas as $area ) {
 
 		$term = term_exists($area->name, $taxonomy, $parent_id);
-		if ( $term===0 ) {
+		if ( $term == 0 ) {
 			$args = array('slug'=>$area->slug, 'parent'=>$parent_id);
 			$term = wp_insert_term($area->name, $taxonomy, $args);
 		}
