@@ -11,7 +11,8 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 defined('ABSPATH') or die('Nice try!');
 
-
+global $taxonomy;
+$taxonomy = 'geoareas';
 
 class GeographicArea {
 
@@ -32,6 +33,8 @@ class GeographicArea {
 add_action('init', 'geoareas_register_taxonomy');
 function geoareas_register_taxonomy()
 {
+	global $taxonomy;
+
 	$labels = array(
 		'name'              => _x('GeoArea', 'taxonomy general name'),
 		'singular_name'     => _x('GeoAreas', 'taxonomy singular name'),
@@ -56,7 +59,7 @@ function geoareas_register_taxonomy()
 
 	$post_types = array('post', 'request', 'offering', 'page', 'partner');
 
-	register_taxonomy('geographicterms_israel', $post_types, $args);
+	register_taxonomy($taxonomy, $post_types, $args);
 
 }
 
@@ -65,7 +68,8 @@ function geoareas_register_taxonomy()
 add_action('init', 'geoareas_add_terms');
 function geoareas_add_terms()
 {
-	$taxonomy = 'geographicterms_israel';
+	global $taxonomy;
+
 	$check = get_terms($taxonomy);
 
 	if ( !$check ) {
