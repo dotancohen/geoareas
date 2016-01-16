@@ -5,8 +5,8 @@ Description: Provide a geography taxonomy containing the hierarchical areas insi
 Version:     0.1
 Author:      Dotan Cohen
 Author URI:  http://dotancohen.com
-License:     GPL2
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+License:     GPL3
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 */
 
 defined('ABSPATH') or die('Nice try!');
