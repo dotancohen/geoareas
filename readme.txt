@@ -34,7 +34,7 @@ Because that is what a particular client needed when I wrote it.
 
 = What about other nations? =
 
-No problem. Contact me with the hierarchical areas in your nation of interest and I'll make a plugin for it.
+No problem! Contact me with the hierarchical areas in your nation of interest and I'll add it.
 
 
 = Does this plugin support wider geographical entities, such as continents? =
