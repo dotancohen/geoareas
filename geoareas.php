@@ -1,7 +1,7 @@
 <?php
 /*
-Plugin Name: GeoAreas: Israel
-Description: Provide a geography taxonomy containing the hierarchical areas inside the State of Israel.
+Plugin Name: GeoAreas
+Description: Provide a geography taxonomy containing hierarchical geographic areas.
 Version:     0.1
 Author:      Dotan Cohen
 Author URI:  http://dotancohen.com
@@ -29,8 +29,8 @@ class GeographicArea {
 
 
 
-add_action('init', 'geoareas_israel_register_taxonomy');
-function geoareas_israel_register_taxonomy()
+add_action('init', 'geoareas_register_taxonomy');
+function geoareas_register_taxonomy()
 {
 	$labels = array(
 		'name'              => _x('GeoArea', 'taxonomy general name'),
@@ -62,22 +62,22 @@ function geoareas_israel_register_taxonomy()
 
 
 
-add_action('init', 'geoareas_israel_add_terms');
-function geoareas_israel_add_terms()
+add_action('init', 'geoareas_add_terms');
+function geoareas_add_terms()
 {
 	$taxonomy = 'geographicterms_israel';
 	$check = get_terms($taxonomy);
 
 	if ( !$check ) {
-		$areas = geoareas_israel_get_areas();
-		geoareas_israel_add_area($taxonomy, $areas);
+		$areas = geoareas_get_areas();
+		geoareas_add_area($taxonomy, $areas);
 	}
 
 }
 
 
 
-function geoareas_israel_add_area($taxonomy, $areas, $parent_id=0) {
+function geoareas_add_area($taxonomy, $areas, $parent_id=0) {
 
 	foreach ( $areas as $area ) {
 
@@ -88,7 +88,7 @@ function geoareas_israel_add_area($taxonomy, $areas, $parent_id=0) {
 		}
 
 		if ( $area->children !== NULL ) {
-			geoareas_israel_add_area($taxonomy, $area->children, $term['term_id']);
+			geoareas_add_area($taxonomy, $area->children, $term['term_id']);
 		}
 
 	}
@@ -96,7 +96,7 @@ function geoareas_israel_add_area($taxonomy, $areas, $parent_id=0) {
 
 
 
-function geoareas_israel_get_areas()
+function geoareas_get_areas()
 {
 	$sub_north = array (
 		new GeographicArea('haifa', 'חיפה והסביבה'),
