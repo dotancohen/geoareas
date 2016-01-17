@@ -59,6 +59,9 @@ function geoareas_register_taxonomy()
 
 	$post_types = array('post', 'request', 'offering', 'page', 'partner');
 
+	$post_types = apply_filters('geoareas_post_types', $post_types);
+	$args = apply_filters('geoareas_register_taxonomy', $args);
+
 	register_taxonomy($taxonomy, $post_types, $args);
 
 }
@@ -74,6 +77,7 @@ function geoareas_add_terms()
 
 	if ( !$check ) {
 		$areas = geoareas_get_areas();
+		$areas = apply_filters('geoareas_areas', $areas);
 		geoareas_add_area($taxonomy, $areas);
 	}
 
@@ -88,6 +92,7 @@ function geoareas_add_area($taxonomy, $areas, $parent_id=0) {
 		$term = term_exists($area->name, $taxonomy, $parent_id);
 		if ( $term == 0 ) {
 			$args = array('slug'=>$area->slug, 'parent'=>$parent_id);
+			$args = apply_filters('geoareas_insert_term', $args);
 			$term = wp_insert_term($area->name, $taxonomy, $args);
 		}
 
