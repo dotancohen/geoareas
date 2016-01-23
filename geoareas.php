@@ -119,11 +119,13 @@ function geoareas_delete_areas()
 
 function geoareas_delete_area($taxonomy, $areas)
 {
-	$tid = get_term_by('slug', $area->slug);
-	wp_delete_term($tid, $taxonomy);
+	foreach ( $areas as $area ) {
+		$tid = get_term_by('slug', $area->slug);
+		wp_delete_term($tid, $taxonomy);
 
-	if ( $area->children !== NULL ) {
-		geoareas_delete_areas($taxonomy, $area->children);
+		if ( $area->children !== NULL ) {
+			geoareas_delete_areas($taxonomy, $area->children);
+		}
 	}
 }
 
