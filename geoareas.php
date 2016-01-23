@@ -77,7 +77,7 @@ function geoareas_add_terms()
 
 	if ( !$check ) {
 		$areas = geoareas_get_areas();
-		$areas = apply_filters('geoareas_areas', $areas);
+		$areas = apply_filters('geoareas_insert_areas', $areas);
 		geoareas_add_area($taxonomy, $areas);
 	}
 
@@ -92,7 +92,7 @@ function geoareas_add_area($taxonomy, $areas, $parent_id=0) {
 		$term = term_exists($area->name, $taxonomy, $parent_id);
 		if ( $term == 0 ) {
 			$args = array('slug'=>$area->slug, 'parent'=>$parent_id);
-			$args = apply_filters('geoareas_insert_term', $args);
+			$args = apply_filters('geoareas_insert_area', $args);
 			$term = wp_insert_term($area->name, $taxonomy, $args);
 		}
 
