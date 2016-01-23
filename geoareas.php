@@ -2,7 +2,7 @@
 /*
 Plugin Name: GeoAreas
 Description: Provide a geography taxonomy containing hierarchical geographic areas.
-Version:     0.1
+Version:     0.2
 Author:      Dotan Cohen
 Author URI:  http://dotancohen.com
 License:     GPL3
