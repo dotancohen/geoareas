@@ -105,6 +105,30 @@ function geoareas_add_area($taxonomy, $areas, $parent_id=0) {
 
 
 
+register_activation_hook( __FILE__, 'geoareas_delete_areas' );
+function geoareas_delete_areas()
+{
+	global $taxonomy;
+
+	$areas = geoareas_get_areas();
+	geoareas_delete_area($taxonomy, $areas);
+
+}
+
+
+
+function geoareas_delete_area($taxonomy, $areas)
+{
+	$tid = get_term_by('slug', $area->slug);
+	wp_delete_term($tid, $taxonomy);
+
+	if ( $area->children !== NULL ) {
+		geoareas_delete_areas($taxonomy, $area->children);
+	}
+}
+
+
+
 function geoareas_get_areas()
 {
 	$sub_north = array (
