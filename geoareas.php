@@ -124,7 +124,7 @@ function geoareas_delete_area($taxonomy, $areas)
 		wp_delete_term($tid, $taxonomy);
 
 		if ( $area->children !== NULL ) {
-			geoareas_delete_areas($taxonomy, $area->children);
+			geoareas_delete_area($taxonomy, $area->children);
 		}
 	}
 }
