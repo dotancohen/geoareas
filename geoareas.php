@@ -105,7 +105,7 @@ function geoareas_add_area($taxonomy, $areas, $parent_id=0) {
 
 
 
-register_activation_hook( __FILE__, 'geoareas_delete_areas' );
+register_deactivation_hook( __FILE__, 'geoareas_delete_areas' );
 function geoareas_delete_areas()
 {
 	global $taxonomy;
@@ -120,7 +120,7 @@ function geoareas_delete_areas()
 function geoareas_delete_area($taxonomy, $areas)
 {
 	foreach ( $areas as $area ) {
-		$tid = get_term_by('slug', $area->slug);
+		$tid = get_term_by('slug', $area->slug, $taxonomy);
 		wp_delete_term($tid, $taxonomy);
 
 		if ( $area->children !== NULL ) {
