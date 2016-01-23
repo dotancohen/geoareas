@@ -4,7 +4,7 @@ Contributors: dotancohen
 Tags: Geography, Israel
 Requires at least: 3.9
 Tested up to: 4.4.1
-Stable tag: 0.2
+Stable tag: 0.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -54,6 +54,9 @@ No, this plugin supports adding only specific geographic areas. For instance, if
 
 
 == Changelog ==
+
+= 0.3 =
+* Essential bugfixes for plugin deactivation
 
 = 0.2 =
 * Proper plugin uninstall behaviour
