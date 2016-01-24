@@ -1,11 +1,11 @@
 # GeoAreas
 
-Contributors: dotancohen
-Tags: Geography, Israel
-Requires at least: 3.9
-Tested up to: 4.4.1
-Stable tag: 0.3
-License: GPLv3 or later
+Contributors: dotancohen  
+Tags: Geography, Israel  
+Requires at least: 3.9  
+Tested up to: 4.4.1  
+Stable tag: 0.3  
+License: GPLv3 or later  
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Provide a taxonomy called GeoAreas containing hierarchical geographical areas.
@@ -29,7 +29,7 @@ This plugin supplies users with a taxonomy which makes available Wordpress terms
 
 ### Where is this plugin maintained? Can I file issues or fork it?
 
-This plugin is maintained at Github, and you are invited to file issues, feature requests, forks, pull requests, and translations. Thank you!
+This plugin is maintained at Github, and you are invited to file issues, feature requests, forks, pull requests, and translations. Thank you!  
 https://github.com/dotancohen/geoareas
 
 
