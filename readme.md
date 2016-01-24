@@ -1,4 +1,4 @@
-=== GeoAreas ===
+# GeoAreas
 
 Contributors: dotancohen
 Tags: Geography, Israel
@@ -12,61 +12,66 @@ Provide a taxonomy called GeoAreas containing hierarchical geographical areas.
 
 
 
-== Description ==
+## Description
 
 This plugin supplies users with a taxonomy which makes available Wordpress terms, PHP arrays, and HTML select lists containing hierarchical geographical areas.
 
 
 
-== Installation ==
+## Installation
 
 1. Upload the plugin files to the `/wp-content/plugins/geoareas` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress.
 
 
 
-== Frequently Asked Questions ==
+## Frequently Asked Questions
 
-= Where is this plugin maintained? Can I file issues or fork it? =
+### Where is this plugin maintained? Can I file issues or fork it?
 
 This plugin is maintained at Github, and you are invited to file issues, feature requests, forks, pull requests, and translations. Thank you!
 https://github.com/dotancohen/geoareas
 
 
-= Why does this plugin currently target only Israel? =
+### Why does this plugin currently target only Israel?
 
 Because that is what a particular client needed when I wrote it.
 
 
-= What about other nations? =
+### What about other nations?
 
 No problem! Contact me with the hierarchical areas in your nation of interest and I'll add it.
 
 
-= Does this plugin support wider geographical entities, such as continents? =
+### Does this plugin support wider geographical entities, such as continents?
 
 Yes, this use case was designed into the plugin.
 
 
-= Does this plugin support smaller geographical entities, such as cities and streets? =
+### Does this plugin support smaller geographical entities, such as cities and streets?
 
 Yes, this use case was designed into the plugin.
 
 
-= Will I need to install all geographic areas to use this plugin? =
+### Will I need to install all geographic areas to use this plugin?
 
 No, this plugin supports adding only specific geographic areas. For instance, if you live in Berlin, you do not need to install every street name in Tokyo.
 
 
+### Why does this project have two README files?
 
-== Changelog ==
+Because the Wordpress and Github README formats differ.
 
-= 0.3 =
+
+
+## Changelog
+
+### 0.3
 * Essential bugfixes for plugin deactivation
 
-= 0.2 =
+### 0.2
 * Proper plugin uninstall behaviour
 
-= 0.1 =
+### 0.1
 * Initial released version
 
