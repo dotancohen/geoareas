@@ -57,7 +57,7 @@ function geoareas_register_taxonomy()
 		'rewrite'      => array( 'slug' => 'state' ),
 	);
 
-	$post_types = array('post', 'request', 'offering', 'page', 'partner');
+	$post_types = array('post', 'page');
 
 	$post_types = apply_filters('geoareas_post_types', $post_types);
 	$args = apply_filters('geoareas_register_taxonomy', $args);
