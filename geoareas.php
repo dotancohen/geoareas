@@ -68,7 +68,7 @@ function geoareas_register_taxonomy()
 
 
 
-add_action('init', 'geoareas_add_terms');
+register_activation_hook(__FILE__, 'geoareas_add_terms');
 function geoareas_add_terms()
 {
 	global $taxonomy;
