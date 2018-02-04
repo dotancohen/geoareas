@@ -3,8 +3,8 @@
 Contributors: dotancohen
 Tags: Geography, Israel
 Requires at least: 3.9
-Tested up to: 4.6
-Stable tag: 0.3
+Tested up to: 4.9.2
+Stable tag: 0.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -33,7 +33,7 @@ This plugin is maintained at Github, and you are invited to file issues, feature
 https://github.com/dotancohen/geoareas
 
 
-= Why does this plugin currently target only Israel? =
+= Why does this plugin currently have detailed areas only for Israel? =
 
 Because that is what a particular client needed when I wrote it.
 
@@ -60,6 +60,10 @@ No, this plugin supports adding only specific geographic areas. For instance, if
 
 
 == Changelog ==
+
+= 0.4 =
+* Add all countries
+* Register taxonomies only on plugin activation
 
 = 0.3 =
 * Essential bugfixes for plugin deactivation
