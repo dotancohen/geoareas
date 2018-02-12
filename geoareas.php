@@ -428,3 +428,25 @@ function geoareas_get_areas()
 	return $main_areas;
 }
 
+
+
+/**
+ * @param \WP_Post $post
+ * @param boolean $flatten
+ * @return \WP_Term[]|string
+ */
+function geoareas_get_country(\WP_Post $post, $flatten=FALSE)
+{
+	$countries = wp_get_object_terms($post->ID, GEOAREAS);
+
+	if ( !is_array($countries) ) {
+		$countries = [];
+	}
+
+	if ( $flatten ) {
+		$countries = implode(", ", array_map(function($x){ return $x->name;}, $countries));
+	}
+
+	return $countries;
+}
+
