@@ -2,7 +2,7 @@
 /*
 Plugin Name: GeoAreas
 Description: Provide a geography taxonomy containing hierarchical geographic areas.
-Version:     0.4
+Version:     0.5
 Author:      Dotan Cohen
 Author URI:  http://dotancohen.com
 License:     GPL3
@@ -27,6 +27,10 @@ class GeographicArea {
 		$this->children = $children;
 	}
 }
+
+
+
+register_activation_hook(__FILE__, function(){ define('GEOAREAS_ADD_TERMS', 1); });
 
 
 
@@ -64,11 +68,13 @@ function geoareas_register_taxonomy()
 
 	register_taxonomy($taxonomy, $post_types, $args);
 
+	if ( defined('GEOAREAS_ADD_TERMS') &&  GEOAREAS_ADD_TERMS) {
+		geoareas_add_terms();
+	}
 }
 
 
 
-register_activation_hook(__FILE__, 'geoareas_add_terms');
 function geoareas_add_terms()
 {
 	global $taxonomy;
